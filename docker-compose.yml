@@ -1,0 +1,31 @@
+networks:
+  proxy:
+    name: backbone_proxy
+    external: true
+  database:
+    name: backbone_database
+    external: true
+
+services:
+  snipeit:
+    container_name: snipit
+    image: snipe/snipe-it:v8.3.7
+    restart: unless-stopped
+    volumes:
+      - ./snipeit:/var/lib/snipeit
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=backbone_proxy
+      - traefik.http.routers.snipit.ruleSyntax=v3
+      - traefik.http.routers.snipit.tls=true
+      - traefik.http.routers.snipit.tls.certresolver=${CERTRESOLVER:-}
+      - traefik.http.routers.snipit.entryPoints=https
+      - traefik.http.routers.snipit.rule=Host("${APPLICATION_FQDN}")
+      - traefik.http.routers.snipit.service=snipit-service
+      - traefik.http.services.snipit-service.loadbalancer.server.port=80
+    env_file:
+      - .env 
+      - setup.env
+    networks:
+      - proxy
+      - database
