@@ -16,7 +16,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=backbone_proxy
-      - traefik.http.routers.snipit.ruleSyntax=v3
+      - traefik.http.middlewares.snipit.digestauth.users=${DIGEST_AUTH_USERS:-}
       - traefik.http.routers.snipit.tls=true
       - traefik.http.routers.snipit.tls.certresolver=${CERTRESOLVER:-}
       - traefik.http.routers.snipit.entryPoints=https
