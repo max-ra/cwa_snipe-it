@@ -23,9 +23,9 @@ services:
       - traefik.http.routers.snipit.rule=Host("${APPLICATION_FQDN}")
       - traefik.http.routers.snipit.service=snipit-service
       - traefik.http.services.snipit-service.loadbalancer.server.port=80
-    env_file:
-      - .env 
+    env_file: 
       - setup.env
+      - .env
     networks:
       - proxy
       - database
