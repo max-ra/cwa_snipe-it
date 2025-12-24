@@ -16,13 +16,13 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=backbone_proxy
-      - traefik.http.middlewares.snipit.digestauth.users=${DIGEST_AUTH_USERS:-}
-      - traefik.http.routers.snipit.tls=true
-      - traefik.http.routers.snipit.tls.certresolver=${CERTRESOLVER:-}
-      - traefik.http.routers.snipit.entryPoints=https
-      - traefik.http.routers.snipit.rule=Host("${APPLICATION_FQDN}")
-      - traefik.http.routers.snipit.service=snipit-service
-      - traefik.http.services.snipit-service.loadbalancer.server.port=80
+      - traefik.http.routers.snipeit.middlewares=${MIDDLEWARES:-}
+      - traefik.http.routers.snipeit.tls=true
+      - traefik.http.routers.snipeit.tls.certresolver=${CERTRESOLVER:-}
+      - traefik.http.routers.snipeit.entryPoints=https
+      - traefik.http.routers.snipeit.rule=Host("${APPLICATION_FQDN}")
+      - traefik.http.routers.snipeit.service=snipeit-service
+      - traefik.http.services.snipeit-service.loadbalancer.server.port=80
     env_file: 
       - setup.env
       - .env
