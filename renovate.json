@@ -6,8 +6,5 @@
       "matchCurrentVersion": "!/^0/",
       "automerge": true
     }
-  ],
-  "extends": [
-    "local>Rauch-IT/renovate-config"
   ]
 }
