@@ -9,7 +9,7 @@ networks:
 services:
   snipeit:
     container_name: snipeit
-    image: snipe/snipe-it:v8.6.0
+    image: snipe/snipe-it:v8.6.1
     restart: unless-stopped
     volumes:
       - ./snipeit:/var/lib/snipeit
